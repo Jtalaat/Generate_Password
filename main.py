@@ -28,5 +28,8 @@ for l in range(1,nr_numbers+1):
   New_password.append(random.choice(numbers))
 for l in range(1,nr_symbols+1):
   New_password.append(random.choice(symbols))
-F_password = random.shufflex(New_password)
-print(F_password)
+random.shuffle(New_password)
+pas = ""
+for l in New_password:
+    pas += l
+print(pas)
