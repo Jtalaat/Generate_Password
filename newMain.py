@@ -1,9 +1,16 @@
+import tkinter as t
+import pandas as pd
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
 
 # ---------------------------- SAVE PASSWORD ------------------------------- #
+def save():
+    
+    with open('data.csv','a') as f:
+        f.write(f"{entry_website.get()},{entry_Email.get()},{entry_Pass.get()}\n")
+    entry_website.delete(0,t.END)
+    entry_Pass.delete(0,t.END)
 
 # ---------------------------- UI SETUP ------------------------------- #
-import tkinter as t
 
 window = t.Tk()
 window.title("Bassword Generate")
@@ -24,18 +31,19 @@ label_pass = t.Label(text='Password')
 label_pass.grid(column=0,row=3)
 
 #Entry
-entry_1 = t.Entry(width=35)
-entry_1.focus()
-entry_1.grid(column=1,row=1,columnspan=2)
-entry_2 = t.Entry(width=35)
-entry_2.grid(column=1,row=2,columnspan=2)
-entry_3 = t.Entry(width=21)
-entry_3.grid(column=1,row=3)
+entry_website = t.Entry(width=35)
+entry_website.focus()
+entry_website.grid(column=1,row=1,columnspan=2)
+entry_Email = t.Entry(width=35)
+entry_Email.insert(0,'john.abdelmasseh@gmail.com')
+entry_Email.grid(column=1,row=2,columnspan=2)
+entry_Pass = t.Entry(width=25)
+entry_Pass.grid(column=1,row=3)
 
 #Button
 button_gen = t.Button(text="Generate",command="")
 button_gen.grid(row=3,column=2,)
-button_add = t.Button(text="Supmit",width=30,command="")
+button_add = t.Button(text="Supmit",width=30,command=save)
 button_add.grid(row=4,column=1,columnspan=2)
 
 
