@@ -22,7 +22,7 @@ def save():
         messagebox.showinfo(title='oobs' ,message="Please check entired data")
     elif messagebox.askokcancel(title=web,message=f'we need to add this {mail}\n,and {pas}\n for mentioned web \nis it Ok'):     
         with open('data.json','w') as f:
-            json.dump(new_data,f)
+            json.dump(new_data,f,indent=4)
         entry_website.delete(0,t.END)
         entry_Pass.delete(0,t.END)
 
