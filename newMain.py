@@ -1,4 +1,5 @@
 
+import email
 import tkinter as t
 from tkinter import messagebox
 import pandas as pd
@@ -15,12 +16,13 @@ def save():
     web = entry_website.get()
     mail = entry_Email.get()
     pas = entry_Pass.get()
+    new_data = {web:{'email':mail,'password':pas}}
 
     if len(web)==0 or len(mail) ==0 or len(pas) == 0:
         messagebox.showinfo(title='oobs' ,message="Please check entired data")
     elif messagebox.askokcancel(title=web,message=f'we need to add this {mail}\n,and {pas}\n for mentioned web \nis it Ok'):     
-        with open('data.csv','w') as f:
-            json.dump(f"{web},{mail},{pas}\n")
+        with open('data.json','w') as f:
+            json.dump(new_data,f)
         entry_website.delete(0,t.END)
         entry_Pass.delete(0,t.END)
 
