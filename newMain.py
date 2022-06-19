@@ -2,7 +2,7 @@
 import tkinter as t
 from tkinter import messagebox
 import pandas as pd
-from main import password1
+from Password_engine import password1
 import pyperclip
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
 def generate():
@@ -17,7 +17,7 @@ def save():
 
     if len(web)==0 or len(mail) ==0 or len(pas) == 0:
         messagebox.showinfo(title='oobs' ,message="Please check entired data")
-    elif messagebox.askokcancel(title=web,message=f'there are details add {mail},and {pas} is it Ok'):     
+    elif messagebox.askokcancel(title=web,message=f'we need to add this {mail}\n,and {pas}\n for mentioned web \nis it Ok'):     
         with open('data.csv','a') as f:
             f.write(f"{web},{mail},{pas}\n")
         entry_website.delete(0,t.END)
