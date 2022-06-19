@@ -1,14 +1,27 @@
-import tkinter as t
-import pandas as pd
-# ---------------------------- PASSWORD GENERATOR ------------------------------- #
 
+import tkinter as t
+from tkinter import messagebox
+import pandas as pd
+from main import password1
+import pyperclip
+# ---------------------------- PASSWORD GENERATOR ------------------------------- #
+def generate():
+    entry_Pass.delete(0,t.END)
+    entry_Pass.insert(0,password1)
+    pyperclip.copy(password1)
 # ---------------------------- SAVE PASSWORD ------------------------------- #
 def save():
-    
-    with open('data.csv','a') as f:
-        f.write(f"{entry_website.get()},{entry_Email.get()},{entry_Pass.get()}\n")
-    entry_website.delete(0,t.END)
-    entry_Pass.delete(0,t.END)
+    web = entry_website.get()
+    mail = entry_Email.get()
+    pas = entry_Pass.get()
+
+    if len(web)==0 or len(mail) ==0 or len(pas) == 0:
+        messagebox.showinfo(title='oobs' ,message="Please check entired data")
+    elif messagebox.askokcancel(title=web,message=f'there are details add {mail},and {pas} is it Ok'):     
+        with open('data.csv','a') as f:
+            f.write(f"{web},{mail},{pas}\n")
+        entry_website.delete(0,t.END)
+        entry_Pass.delete(0,t.END)
 
 # ---------------------------- UI SETUP ------------------------------- #
 
@@ -41,7 +54,7 @@ entry_Pass = t.Entry(width=25)
 entry_Pass.grid(column=1,row=3)
 
 #Button
-button_gen = t.Button(text="Generate",command="")
+button_gen = t.Button(text="Generate",command=generate)
 button_gen.grid(row=3,column=2,)
 button_add = t.Button(text="Supmit",width=30,command=save)
 button_add.grid(row=4,column=1,columnspan=2)
