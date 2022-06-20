@@ -1,5 +1,4 @@
 
-import email
 import tkinter as t
 from tkinter import messagebox
 import pandas as pd
@@ -28,11 +27,21 @@ def save():
             json.dump(data,f,indent=4)
         entry_website.delete(0,t.END)
         entry_Pass.delete(0,t.END)
-
+# -----------------------------Search ----------------------------------#
+def search():
+    web = entry_website.get()
+    with open('data.json','r') as file:
+        data = json.load(file)
+        if web in data:
+            email = data[web]['email']
+            passw = data[web]['password']
+            messagebox(title=web,message=f"Email:{email}\nPassword: {passw}")
+        else:
+            pass
 # ---------------------------- UI SETUP ------------------------------- #
 
 window = t.Tk()
-window.title("Bassword Generate")
+window.title("password Generate")
 window.config(padx=50,pady=50)
 canves = t.Canvas(height=200,width=200)
 file =t.PhotoImage(file='logo.png')
@@ -50,9 +59,9 @@ label_pass = t.Label(text='Password')
 label_pass.grid(column=0,row=3)
 
 #Entry
-entry_website = t.Entry(width=35)
+entry_website = t.Entry(width=25)
 entry_website.focus()
-entry_website.grid(column=1,row=1,columnspan=2)
+entry_website.grid(column=1,row=1)
 entry_Email = t.Entry(width=35)
 entry_Email.insert(0,'john.abdelmasseh@gmail.com')
 entry_Email.grid(column=1,row=2,columnspan=2)
@@ -61,10 +70,11 @@ entry_Pass.grid(column=1,row=3)
 
 #Button
 button_gen = t.Button(text="Generate",command=generate)
-button_gen.grid(row=3,column=2,)
+button_gen.grid(row=3,column=2)
 button_add = t.Button(text="Supmit",width=30,command=save)
 button_add.grid(row=4,column=1,columnspan=2)
-
+button_search = t.Button(text="Search",command=search)
+button_search.grid(row=1,column=2)
 
 
 
